@@ -40,12 +40,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit->setFont(QFont("Calibri", 14));
     ui->LengthLine->setAlignment(Qt::AlignCenter);
     ui->LengthLine->setFont(QFont("Calibri", 14));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(process_1()));
+    ui->BedButton->setCursor(Qt::PointingHandCursor);
+    ui->FastaButton_Tab2->setCursor(Qt::PointingHandCursor);
+    ui->pushButton_3->setCursor(Qt::PointingHandCursor);
+    ui->pushButton_4->setCursor(Qt::PointingHandCursor);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+//----------Tab 1---------------------------
 
 void MainWindow::on_pushButton_3_clicked()
 {
@@ -72,8 +79,7 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
    threshold = arg1.toDouble();
 }
 
-void MainWindow::on_pushButton_clicked()
-{
+void MainWindow::process_1() {
     // Bouton depart programme
 
     QString errors("Missing: \n");
@@ -104,17 +110,29 @@ void MainWindow::on_pushButton_clicked()
                                QMessageBox::Ok);
 
     }else {
-        ui->textBrowser_9->setText("Program is running...");
-        ui->textBrowser_9->setFont(QFont("Calibri", 14, true, true));
-        ui->textBrowser_9->setTextColor(QColor(0,0,255));
+
         Fastareader fasta(FastaFileName.toStdString());
         fasta.ReadAndCreate(MatrixFileName.toStdString(), threshold);
-        reset_1();
-        ui->result2->setText("OUTPUT");
-        on_result2_clicked();
+        QPushButton* result = new QPushButton("OUTPUT", ui->tab);
+        result->setGeometry(40, 510, 875, 40);
+        result->setText("OUTPUT");
+        result->show();
+        on_result();
+        connect(result, SIGNAL(clicked()), this, SLOT(on_result()));
     }
 }
 
+void MainWindow::on_result()
+{
+    DIR* dir = opendir("result");
+
+    if (dir) {
+         QDesktopServices::openUrl(QUrl(QApplication::applicationDirPath() + "/../result", QUrl::TolerantMode));
+    } else {
+        mkdir("../result", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+        QDesktopServices::openUrl(QUrl(QApplication::applicationDirPath() + "/../result", QUrl::TolerantMode));
+    }
+}
 
 //-------------- Tab2 ------------------
 
@@ -169,33 +187,21 @@ void MainWindow::on_ButtonFunction2_clicked()
                                errors,
                                QMessageBox::Ok);
 
-    }else {
-        ui->textBrowser_10->setText("Program is running...");
-        ui->textBrowser_10->setFont(QFont("Calibri", 16, true, true));
-        ui->textBrowser_10->setTextColor(QColor(255,0,0));
+    } else {
         QString length(ui->LengthLine->text());
         LinksFile Links(BedfileName.toStdString(), FastafileName_Tab2.toStdString(), length.toInt());
         Links.creationMatrice();
-        reset_2();
-        ui->result->setText("OUTPUT");
-        on_result_clicked();
+        QPushButton* result2 = new QPushButton("OUTPUT", ui->tab_2);
+        result2->setGeometry(40, 510, 875, 40);
+        result2->setText("OUTPUT");
+        result2->show();
+        on_result2();
+        connect(result2, SIGNAL(clicked()), this, SLOT(on_result2()));
     }
 
 }
 
-void MainWindow::on_result_clicked()
-{
-    DIR* dir = opendir("result");
-
-    if (dir) {
-         QDesktopServices::openUrl(QUrl(QApplication::applicationDirPath() + "/../result", QUrl::TolerantMode));
-    } else {
-        mkdir("../result", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-        QDesktopServices::openUrl(QUrl(QApplication::applicationDirPath() + "/../result", QUrl::TolerantMode));
-    }
-}
-
-void MainWindow::on_result2_clicked()
+void MainWindow::on_result2()
 {
 
     DIR* dir = opendir("result");
@@ -206,16 +212,4 @@ void MainWindow::on_result2_clicked()
         mkdir("../result", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
         QDesktopServices::openUrl(QUrl(QApplication::applicationDirPath() + "/../result", QUrl::TolerantMode));
     }
-}
-
-void MainWindow::reset_1() {
-    ui->textBrowser_9->setText("Please enter your arguments ...");
-    ui->textBrowser_9->setFont(QFont("Calibri", 14, true, true));
-    ui->textBrowser_9->setTextColor(QColor(0,0,255));
-}
-
-void MainWindow::reset_2() {
-    ui->textBrowser_10->setText("Please enter your arguments ...");
-    ui->textBrowser_10->setFont(QFont("Calibri", 14, true, true));
-    ui->textBrowser_10->setTextColor(QColor(255,0,0));
 }

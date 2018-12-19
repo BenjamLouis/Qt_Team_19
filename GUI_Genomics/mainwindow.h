@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <array>
+#include "waitingspinnerwidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,21 +26,17 @@ private slots:
     
     void on_lineEdit_textChanged(const QString &arg1);
 
-    void on_pushButton_clicked();
-
     void on_FastaButton_Tab2_clicked();
 
     void on_BedButton_clicked();
 
     void on_ButtonFunction2_clicked();
 
-    void on_result_clicked();
+    void on_result();
 
-    void on_result2_clicked();
+    void on_result2();
 
-    void reset_1();
-
-    void reset_2();
+    void process_1();
 
 private:
     Ui::MainWindow *ui;
