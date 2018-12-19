@@ -30,7 +30,7 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Functionnality 2&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -156,13 +156,13 @@ p, li { white-space: pre-wrap; }
        <string>Browse Files</string>
       </property>
      </widget>
-     <widget class="QTextBrowser" name="textBrowser_9">
+     <widget class="QTextEdit" name="textEdito">
       <property name="geometry">
        <rect>
         <x>650</x>
         <y>350</y>
         <width>241</width>
-        <height>51</height>
+        <height>41</height>
        </rect>
       </property>
      </widget>
@@ -171,7 +171,7 @@ p, li { white-space: pre-wrap; }
      <attribute name="title">
       <string>Tab 2</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="ButtonFunction2">
       <property name="geometry">
        <rect>
         <x>770</x>
@@ -265,20 +265,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt; color:#0000ff;&quot;&gt;Bed File&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_6">
-      <property name="geometry">
-       <rect>
-        <x>620</x>
-        <y>70</y>
-        <width>291</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Browse Files</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_7">
+     <widget class="QPushButton" name="FastaButton_Tab2">
       <property name="geometry">
        <rect>
         <x>620</x>
@@ -291,7 +278,7 @@ p, li { white-space: pre-wrap; }
        <string>Browse Files</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_8">
+     <widget class="QPushButton" name="BedButton">
       <property name="geometry">
        <rect>
         <x>620</x>
@@ -302,6 +289,16 @@ p, li { white-space: pre-wrap; }
       </property>
       <property name="text">
        <string>Browse Files</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="LengthLine">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>70</y>
+        <width>291</width>
+        <height>31</height>
+       </rect>
       </property>
      </widget>
     </widget>
