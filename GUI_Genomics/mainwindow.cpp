@@ -1,4 +1,13 @@
 #include "mainwindow.h"
+#include "../src/fastareader.h"
+#include "../src/BEDreader.h"
+#include "../src/FastaWriter.h"
+#include "../src/LinksFile.h"
+#include "../src/Matrice.h"
+#include "../src/MatrixReader.h"
+#include "../src/MatrixWriter.h"
+#include "../src/TxtWriter.h"
+#include "../src/Writer.h"
 #include "ui_mainwindow.h"
 #include <QPixmap>
 #include <QPalette>
@@ -84,6 +93,13 @@ void MainWindow::on_ButtonFunction2_clicked()
        QMessageBox::warning(this, tr("Missing Information(s)"),
                                errors,
                                QMessageBox::Ok);
+
+    }else {
+
+        QString length(ui->LengthLine->text());
+        LinksFile Links(BedfileName.toStdString(), FastafileName_Tab2.toStdString(), length.toInt());
+        Links.creationMatrice();
+
     }
 
 }
