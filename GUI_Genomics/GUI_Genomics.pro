@@ -14,6 +14,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp\
+        waitingspinnerwidget.cpp\
         ../src/BEDreader.cpp\
         ../src/fastareader.cpp\
         ../src/FastaWriter.cpp\
@@ -25,6 +26,7 @@ SOURCES += main.cpp\
         ../src/Writer.cpp
 
 HEADERS  += mainwindow.h\
+        waitingspinnerwidget.h\
         ../src/BEDreader.h\
         ../src/fastareader.h\
         ../src/FastaWriter.h\

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <array>
+#include "waitingspinnerwidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,7 +26,7 @@ private slots:
     
     void on_lineEdit_textChanged(const QString &arg1);
 
-    void on_pushButton_clicked();
+    //void on_pushButton_clicked();
 
     void on_FastaButton_Tab2_clicked();
 
@@ -37,9 +38,9 @@ private slots:
 
     void on_result2_clicked();
 
-    void reset_1();
+    void on_pushButton_pressed();
 
-    void reset_2();
+    void on_pushButton_released();
 
 private:
     Ui::MainWindow *ui;
@@ -48,6 +49,7 @@ private:
     double threshold;
     QString FastafileName_Tab2;
     QString BedfileName;
+    WaitingSpinnerWidget* spinner;
 };
 
 #endif // MAINWINDOW_H

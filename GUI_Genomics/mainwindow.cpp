@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    spinner = new WaitingSpinnerWidget(this, Qt::ApplicationModal, true);
     ui->setupUi(this);
     setFixedSize(1000,600);
     QIcon startCreate(":/hubert.png");
@@ -45,6 +46,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+//----------Tab 1---------------------------
 
 void MainWindow::on_pushButton_3_clicked()
 {
@@ -71,12 +74,12 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
    threshold = arg1.toDouble();
 }
 
-void MainWindow::on_pushButton_clicked()
+/*void MainWindow::on_pushButton_clicked()
 {
     // Bouton depart programme
 
     QString errors("Missing: \n");
-    bool error_arguments;
+    bool error_arguments(false);
     if ((ui->pushButton_3->text() == "Browse Files") or (ui->pushButton_3->text() == "") or (ui->pushButton_3->text() == "Please Select a file")) {
         ui->pushButton_3->setText("Please Select a file");
         errors += "\t-Matrix File \n";
@@ -103,16 +106,15 @@ void MainWindow::on_pushButton_clicked()
                                QMessageBox::Ok);
 
     }else {
-        ui->textBrowser_9->setText("Program is running...");
-        ui->textBrowser_9->setFont(QFont("Calibri", 14, true, true));
-        ui->textBrowser_9->setTextColor(QColor(0,0,255));
+
+        WaitingSpinnerWidget* spinner = new WaitingSpinnerWidget(this, Qt::ApplicationModal, true);
+        spinner->start();
         Fastareader fasta(FastaFileName.toStdString());
         fasta.ReadAndCreate(MatrixFileName.toStdString(), threshold);
-        reset_1();
+        spinner->stop();
         ui->result2->setText("OUTPUT");
-        on_result2_clicked();
     }
-}
+}*/
 
 
 //-------------- Tab2 ------------------
@@ -141,8 +143,12 @@ void MainWindow::on_ButtonFunction2_clicked()
 {
     // Bouton depart programme
 
+
+    WaitingSpinnerWidget* spinner = new WaitingSpinnerWidget(this, Qt::ApplicationModal, true);
+    spinner->start();
+
     QString errors("Missing: \n");
-    bool error_arguments;
+    bool error_arguments(false);
     if ((ui->BedButton->text() == "Browse Files") or (ui->BedButton->text() == "") or (ui->BedButton->text() == "Please Select a file")) {
         ui->BedButton->setText("Please Select a file");
         errors += "\t-Bed File \n";
@@ -168,17 +174,13 @@ void MainWindow::on_ButtonFunction2_clicked()
                                errors,
                                QMessageBox::Ok);
 
-    }else {
-        ui->textBrowser_10->setText("Program is running...");
-        ui->textBrowser_10->setFont(QFont("Calibri", 16, true, true));
-        ui->textBrowser_10->setTextColor(QColor(255,0,0));
+    } else {
         QString length(ui->LengthLine->text());
         LinksFile Links(BedfileName.toStdString(), FastafileName_Tab2.toStdString(), length.toInt());
         Links.creationMatrice();
-        reset_2();
         ui->result->setText("OUTPUT");
-        on_result_clicked();
     }
+    spinner->stop();
 
 }
 
@@ -207,14 +209,44 @@ void MainWindow::on_result2_clicked()
     }
 }
 
-void MainWindow::reset_1() {
-    ui->textBrowser_9->setText("Please enter your arguments ...");
-    ui->textBrowser_9->setFont(QFont("Calibri", 14, true, true));
-    ui->textBrowser_9->setTextColor(QColor(0,0,255));
+void MainWindow::on_pushButton_pressed()
+{
+    QString errors("Missing: \n");
+    bool error_arguments(false);
+    if ((ui->pushButton_3->text() == "Browse Files") or (ui->pushButton_3->text() == "") or (ui->pushButton_3->text() == "Please Select a file")) {
+        ui->pushButton_3->setText("Please Select a file");
+        errors += "\t-Matrix File \n";
+        error_arguments = true;
+    };
+
+    if ((ui->pushButton_4->text() == "Browse Files") or (ui->pushButton_4->text() == "") or (ui->pushButton_4->text() == "Please Select a file")) {
+        ui->pushButton_4->setText("Please Select a file");
+        errors += "\t-Fasta File \n";
+        error_arguments = true;
+    };
+
+    if (ui->lineEdit->text() == "") {
+        errors += "\t-Threshold \n";
+        error_arguments = true;
+
+    }
+
+    if (error_arguments) {
+
+       errors += "\nPlease enter the missing information";
+       QMessageBox::warning(this, tr("Missing Information(s)"),
+                               errors,
+                               QMessageBox::Ok);
+
+    }else {
+        spinner->start();
+    }
 }
 
-void MainWindow::reset_2() {
-    ui->textBrowser_10->setText("Please enter your arguments ...");
-    ui->textBrowser_10->setFont(QFont("Calibri", 14, true, true));
-    ui->textBrowser_10->setTextColor(QColor(255,0,0));
+void MainWindow::on_pushButton_released()
+{
+    Fastareader fasta(FastaFileName.toStdString());
+    fasta.ReadAndCreate(MatrixFileName.toStdString(), threshold);
+    spinner->stop();
+    ui->result2->setText("OUTPUT");
 }
