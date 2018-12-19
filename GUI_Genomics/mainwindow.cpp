@@ -21,6 +21,7 @@
 #include <sys/stat.h>
 #include <iostream>
 #include <QColor>
+#include <QMouseEvent>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -76,7 +77,7 @@ void MainWindow::on_pushButton_clicked()
     // Bouton depart programme
 
     QString errors("Missing: \n");
-    bool error_arguments;
+    bool error_arguments(false);
     if ((ui->pushButton_3->text() == "Browse Files") or (ui->pushButton_3->text() == "") or (ui->pushButton_3->text() == "Please Select a file")) {
         ui->pushButton_3->setText("Please Select a file");
         errors += "\t-Matrix File \n";
@@ -142,7 +143,7 @@ void MainWindow::on_ButtonFunction2_clicked()
     // Bouton depart programme
 
     QString errors("Missing: \n");
-    bool error_arguments;
+    bool error_arguments(false);
     if ((ui->BedButton->text() == "Browse Files") or (ui->BedButton->text() == "") or (ui->BedButton->text() == "Please Select a file")) {
         ui->BedButton->setText("Please Select a file");
         errors += "\t-Bed File \n";
