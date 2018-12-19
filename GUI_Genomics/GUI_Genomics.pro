@@ -21,3 +21,6 @@ FORMS    += mainwindow.ui
 
 RESOURCES += \
     genomics.qrc
+
+DISTFILES += \
+    tabs.png

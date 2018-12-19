@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>background.png</file>
+        <file>hubert.png</file>
+        <file>tabs.png</file>
     </qresource>
 </RCC>

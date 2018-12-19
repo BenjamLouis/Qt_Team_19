@@ -21,9 +21,16 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_pushButton_4_clicked();
+    
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QString MatrixFileName;
+    QString FastaFileName;
+    double threshold;
 };
 
 #endif // MAINWINDOW_H

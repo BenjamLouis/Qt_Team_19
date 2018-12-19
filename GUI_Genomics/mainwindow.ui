@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>987</width>
-    <height>566</height>
+    <width>1000</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Genomics</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTabWidget" name="tabs">
@@ -19,8 +19,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>991</width>
-      <height>571</height>
+      <width>1000</width>
+      <height>600</height>
      </rect>
     </property>
     <property name="toolTip">
@@ -34,7 +34,7 @@
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>Create a txt file from Matrix and Fasta files</string>
      </attribute>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
@@ -139,6 +139,9 @@ p, li { white-space: pre-wrap; }
         <height>51</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Browse Files</string>
       </property>
@@ -156,7 +159,7 @@ p, li { white-space: pre-wrap; }
        <string>Browse Files</string>
       </property>
      </widget>
-     <widget class="QTextBrowser" name="textBrowser_9">
+     <widget class="QLineEdit" name="lineEdit">
       <property name="geometry">
        <rect>
         <x>650</x>
@@ -169,7 +172,7 @@ p, li { white-space: pre-wrap; }
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>Create a Matrix file from bed and fasta files</string>
      </attribute>
      <widget class="QPushButton" name="pushButton_2">
       <property name="geometry">
